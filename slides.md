@@ -1,4 +1,4 @@
-title: Types in javacript
+title: Types in JavaScript
 author:
   twitter: axelhzf
   url: http://axelhzf.com
@@ -8,11 +8,14 @@ theme: ./theme
 
 -- cover
 
-## Types in JavaScript
+# Types in JavaScript
 
 --
 
-Big JavaScript codebases tend to become "read-only".
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
+ (Tom Dale)
+
+[https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0)
 
 --
 
@@ -23,20 +26,22 @@ Big JavaScript codebases tend to become "read-only".
 ## Type systems make code easier to maintain
 
 --
- 
+
+> Big JavaScript codebases tend to become "read-only".
+
+--
+
+# Benefits
+
 * Types can make code more readable
 * Types can make code easier to analyse
 * Types can allow for reliable refactoring
 * Types can allow for generally better IDE support
 * Types can catch some (type related) errors early
 
-A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.
-
 --
 
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
- ([Tom Dale](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0))
-
+> A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.
 
 --
 
@@ -46,7 +51,7 @@ A smart static type checker increases our confidence in our code, catches easily
 
 ## JSDoc
 
-```
+```javascript
 /**
 * Converts an IDL into a understandable text
 * @param {Object} idl - The Intermediate Definition Language
@@ -64,9 +69,9 @@ app.monitoring.stringifyIDL = function(idl, useHTML) {
 
 --
 
-## React's proptypes
+## React's PropTypes
 
-```
+```javascript
 ActivationAccount.propTypes = {
   account: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -76,30 +81,50 @@ ActivationAccount.propTypes = {
   formatNumber: PropTypes.func,
   translate: PropTypes.func,
 };
-
-* Problem: Just for react components. Limited expressiveness
-
 ```
+
+* Problem: Just for React components. Limited expressiveness.
 
 --
 
 ## We are not talking about an “alternative” JavaScript.
 
-### Sorry coffescript fans
+(Sorry CoffeScript fans)
 
 --
 
 # Types had bad reputation
 
-* Types have a reputation of being unnecessarily ceremonious
-* This is not about putting the "Java" back into JavaScript
-* Modern types systems are smarter
+--
+
+```java
+public abstract class AbstractSingletonProxyFactoryBean
+extends ProxyConfig
+implements FactoryBean, BeanClassLoaderAware, InitializingBean {
+    ...
+}
+
+http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html
+```
 
 --
 
+# Types bad reputation
+
+* This is not about putting the "Java" back into JavaScript
+* Types have a reputation of being unnecessarily ceremonious
+
+--
+
+> Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.
+
+--
+
+## Modern types systems are smarter
+
 ## Type inference
 
-```
+```typescript
 var foo = 123;
 foo = '456'; // Error: cannot assign `string` to `number`
 ```
@@ -110,243 +135,252 @@ foo = '456'; // Error: cannot assign `string` to `number`
 
 * Duck typing is a first class language construct
 
+> If it looks like a duck and quacks like a duck, it's a duck
  
- ```
- interface Point2D {
-     x: number;
-     y: number;
- }
- interface Point3D {
-     x: number;
-     y: number;
-     z: number;
- }
- var point2D: Point2D = { x: 0, y: 10 }
- var point3D: Point3D = { x: 0, y: 10, z: 20 }
- function iTakePoint2D(point: Point2D) { /* do something */ }
+--
  
- iTakePoint2D(point2D); // exact match okay
- iTakePoint2D(point3D); // extra information okay
- iTakePoint2D({ x: 0 }); // Error: missing information `y`
- ```
+```
+interface Point2D {
+ x: number;
+ y: number;
+}
+interface Point3D {
+ x: number;
+ y: number;
+ z: number;
+}
+var point2D: Point2D = { x: 0, y: 10 }
+var point3D: Point3D = { x: 0, y: 10, z: 20 }
+function iTakePoint2D(point: Point2D) { /* do something */ }
+
+iTakePoint2D(point2D); // exact match okay
+iTakePoint2D(point3D); // extra information okay
+iTakePoint2D({ x: 0 }); // Error: missing information `y`
+```
 
 --
 
+## Types can help us with problems we have every day.
 
-Nullability
-One of my main sources of runtime exceptions when programming Java
+--
 
-Even after many years it is still surprising how many corner cases I miss in complex code
+## Nullability
 
+--
 
+![](images/undefined.png)
+
+--
+
+```javascript
+function foo(num) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
+
+const fooed = foo(9);
+fooed.toString();
 ```
-function foo(num: number) {
-4      if (num > 10) {
-5          return 'cool';
-6      }
-7  }
 
+--
+
+Uncaught TypeError: Cannot read property 'toString' of undefined
+
+--
+
+```typescript
+function foo(num: number) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
 
 const fooed: string|void = foo(9);
-3  if (fooed) {
-4      fooed.toString();
-5  }
+if (fooed) {
+  fooed.toString();
+}
 
 ```
 
-typescript strictNullChecks
+--
+
+# TypeScript vs Flow
 
 --
 
-Generics
-
-let cats: Array<Cat> = []; // can only contain cats
-2  let animals: Array<Animal> = []; // can only contain animals
-
---
-
-Typescript
+# Typescript
  
- * Its a superset of javascript
- * 
-
-ease of use and tool support over soundness
-
-http://www.typescriptlang.org/
-By Microsoft (Anders Hejlsberg)
-Based on ES6 (probably ES7/ES8)
-Adds optional type annotations, visibility, and decorators
-Compiler checks and removes annotations
-2.x with major changes released recently
+* Its a superset of javascript 
+* By Microsoft
+* Ease of use and tool support over soundness
+* Based on ES6 (probably ES7/ES8)
+* Adds optional type annotations, visibility, and decorators
+* Compiler checks and transpile to ES3/ES5/ES6
+* 2.x with major changes released recently
 
 --
 
-Flow
+# Flow
 
-* No es un lenguaje nuevo, es un type checker
-* Se le añade un preprocesador a babel para eliminar las anotaciones de los tipos
-soundness, no runtime exceptions as goal
-http://flowtype.org/
-By Facebook
-Flow is a static type checker, designed to quickly find errors in JavaScript applications
-Not a compiler, but checker
-If present, type annotations can very easily be removed by babel for runtime
+* Its a superset of javascript 
+* By Facebook
+* No runtime exceptions as goal
+* Not a compiler, but checker
+* Type annotations can very easily be removed by babel for runtime
 
 --
 
-
-typescript vs flow
+# TypeScript vs Flow
 
 * Both TypeScript and Flow provide gradual static typing capabilities. They also use a similar syntax for type annotations and declaration files.
 
  TypeScript wants to provide great tooling and language services for autocompletion, code navigation, and refactoring. Flow, on the other hand, develops a deeper understanding of your code and even does interprocedural analyses.
 
-
+**IMPROVE**
 
 --
 
-# Migration
+# ES6/7 features available
 
-Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.
+|            | object spread | async/await | generators | property initializators | arrow function | default parameters |
+|------------|---------------|-------------|------------|-------------------------|----------------|--------------------|
+| typescript | √             | √           | √          | √                       | √              | √                  |
 
-## Migration
+http://kangax.github.io/compat-table/es6/
 
-First, we were surprised by the number of small bugs we found when converting our code
+--
+
+# Real life code
+
+https://flow.org/en/docs/frameworks/
+
+--
+
+# React example
+
+```
+type DefaultProps = { prop: string };
+type Props        = { prop: string };
+type State        = { prop: string };
+
+class MyComponent extends React.Component<DefaultProps, Props, State> {    
+    static defaultProps = { prop: "foo" };        
+    state = { prop: "bar" };    
+    button: HTMLButtonElement;
+  
+    onMouseEvent(event: MouseEvent) {
+      // ...
+    }
+    
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        // ...
+    }           
+           
+    render() {
+        return <button ref={el => this.button = el}>Toggle</button>;
+    }
+}
+```
+
+--
+
+# Redux example
+
+## Redux: State
+
+```typescript
+type State = {
+  users: Array<{
+    id: string,
+    name: string,
+    age: number,
+    phoneNumber: string,
+  }>,
+  activeUserID: string,
+  // ...
+};
+```
+
+--
+
+## Redux: Action creator
+
+```typescript
+type FooAction = { type: "FOO", foo: number };
+type BarAction = { type: "BAR", bar: boolean };
+
+type Action = FooAction | BarAction;
+
+function foo(value: number): FooAction {
+  return { type: "FOO", foo: value };
+}
+
+function bar(value: boolean): BarAction {
+  return { type: "BAR", bar: value };
+}
+```
+
+--
+
+## Redux: Reducer
+
+```typescript
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case "FOO": return { ...state, value: action.foo };
+    case "BAR": return { ...state, value: action.bar };
+    default: return state;
+  }
+}
+```
+
+--
+
+## Migration example: Slack
 
 https://slack.engineering/typescript-at-slack-a81307fa288d
 
---
+# Migration: Gradual typing
 
-Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow
-
---
-
-## Migration
-
-It’s taken about six months to annotate most of the JavaScript in the desktop app code base.
+> Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.
 
 --
 
-Developers who have experience using any strongly-typed language usually pick up the syntax within an hour or two
+# Migration: Found existing bugs
+
+> First, we were surprised by the number of small bugs we found when converting our code
 
 --
 
-Are Flow and TypeScript like Java/C++/C#?
+# Migration: Tooling
 
-Both
-optionally typed / any
-built to match common JavaScript programming patterns
-type systems more expressive
-type inference
-control flow based type analysis
-TypeScript
-semantically compatible with JavaScript
-Flow
-just a checker
-not even a language of its own
-non-nullability as default
-
+> Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow
 
 --
 
-Don’t get fooled into thinking that TypeScript is as awkward and occasionally frustrating to use as Java. Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.
+## Migration: Duration
 
+> It’s taken about six months to annotate most of the JavaScript in the desktop app code base.
 
 --
 
-IDE integration
+## Migration: Developers training
 
--- 
+> Developers who have experience using any strongly-typed language usually pick up the syntax within an hour or two
 
-
-Atom / Nuclide
-https://atom.io/
-https://nuclide.io/ (Atom Package)
-Probably best Flow support
-IntelliJ IDEA / Webstorm
-Starting from 2016.3
-
-Flow: integrated checking and display of messages 
-Even better TypeScript support: uses Language Service of TypeScript Compiler
-Basic Elm support via Plugin
-Barrier to entry for JavaScript people
-Flow: low
-fits seamlessly in standard JavaScript build chain
-can be enabled file by file
-weak mode only shows clear errors in order not to overwhelm people
-TypeScript: medium
-different build chain (tsc compiler)
-can include plain JavaScript, but entry point must be TypeScript
-Elm: high
-different syntax, semantics, and tool chain
-Should you use a type checker?
-don't be fooled: checkers do not make your programs error free
-there seems to be little or no impact on productivity
-initial effort to introduce a checker is low, though
-but a type system is a complex thing, it comes at a cost
-My biased recommendation
-
-your project does not live for long: no
-your project is really simple: no
-there is a chance you will need to refactor the thing: yes
-your system is very important or even crucial for the success of your company: yes
-people enter or leave your team frequently: yes
-you have substantial amount of algorithmic code: yes
-Where do they excel?
-TypeScript: supporting people from Java and C# land
-more complete IDE support
-language server
-large set of 3rd party declaration files
-Flow: providing typings for idiomatic JavaScript
-easy to get started even with existing project
-more powerful and flexible generics
-nominal typing for classes
-Elm: functional language deliberately different from JavaScript
-simplicity of type system (no JavaScript legacy)
-always completely typed (no any)
-everything immutable and constant always and everywhere
-complete package (also great orientation for beginners)
- Barrier to entry for JavaScript people 
- Flow: low fits seamlessly in standard JavaScript build chain can be enabled file by file weak mode only shows clear errors in order not to overwhelm people TypeScript: medium different build chain (tsc compiler) can include plain JavaScript, but entry point must be TypeScript Elm: high different syntax, semantics, and tool chain
- 
- 
- 
---
- 
-Should you use a type checker?
-don't be fooled: checkers do not make your programs error free
-there seems to be little or no impact on productivity
-initial effort to introduce a checker is low, though
-but a type system is a complex thing, it comes at a cost
-My biased recommendation
-
-your project does not live for long: no
-your project is really simple: no
-there is a chance you will need to refactor the thing: yes
-your system is very important or even crucial for the success of your company: yes
-people enter or leave your team frequently: yes
-you have substantial amount of algorithmic code: yes
- 
 --
 
-Where do they excel?
-TypeScript: supporting people from Java and C# land
-more complete IDE support
-language server
-large set of 3rd party declaration files
-Flow: providing typings for idiomatic JavaScript
-easy to get started even with existing project
-more powerful and flexible generics
-nominal typing for classes
- 
+## Conclusion: Should you use a type checker?
 
+* your project does not live for long: no
+* your project is really simple: no
+* there is a chance you will need to refactor the thing: yes
+* your system is very important or even crucial for the success of your company: yes
+* people enter or leave your team frequently: yes
+* you have substantial amount of algorithmic code: yes
 
----
-
-docs
-
-https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html
-http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/1
+http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49
 
 
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <title>Types in javacript</title>
+  <title>Types in JavaScript</title>
 
   <link rel="stylesheet" type="text/css" href="theme/style.css">
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -12,11 +12,15 @@
 <div class="reveal">
     <div class="slides">
         <section class="slide  cover">
-    <h2 id="types-in-javascript">Types in JavaScript</h2>
+    <h1 id="types-in-javascript">Types in JavaScript</h1>
 
   </section>
   <section class="slide hidden">
-    <p>Big JavaScript codebases tend to become &quot;read-only&quot;.</p>
+    <blockquote>
+<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
+ (Tom Dale)</p>
+</blockquote>
+<p><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0"><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</a></a></p>
 
   </section>
   <section class="slide hidden">
@@ -28,20 +32,25 @@
 
   </section>
   <section class="slide hidden">
-    <ul>
+    <blockquote>
+<p>Big JavaScript codebases tend to become &quot;read-only&quot;.</p>
+</blockquote>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="benefits">Benefits</h1>
+<ul>
 <li>Types can make code more readable</li>
 <li>Types can make code easier to analyse</li>
 <li>Types can allow for reliable refactoring</li>
 <li>Types can allow for generally better IDE support</li>
 <li>Types can catch some (type related) errors early</li>
 </ul>
-<p>A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.</p>
 
   </section>
   <section class="slide hidden">
     <blockquote>
-<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
- (<a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0">Tom Dale</a>)</p>
+<p>A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.</p>
 </blockquote>
 
   </section>
@@ -51,15 +60,15 @@
   </section>
   <section class="slide hidden  ">
     <h2 id="jsdoc">JSDoc</h2>
-<pre><code>/**
+<pre><code class="lang-javascript"><span class="hljs-comment">/**
 * Converts an IDL into a understandable text
 * @param {Object} idl - The Intermediate Definition Language
 * @param {Boolean} useHTML - True to get a formatted text
 * @return {String}
-*/
-app.monitoring.stringifyIDL = function(idl, useHTML) {
-  var arr = _stringifyIDL(idl, useHTML);
-  return arr.length ? arr[0] : &#39;&#39;;
+*/</span>
+app.monitoring.stringifyIDL = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">idl, useHTML</span>) </span>{
+  <span class="hljs-keyword">var</span> arr = _stringifyIDL(idl, useHTML);
+  <span class="hljs-keyword">return</span> arr.length ? arr[<span class="hljs-number">0</span>] : <span class="hljs-string">''</span>;
 };</code></pre>
 <ul>
 <li>Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation.</li>
@@ -67,8 +76,8 @@ app.monitoring.stringifyIDL = function(idl, useHTML) {
 
   </section>
   <section class="slide hidden">
-    <h2 id="react-s-proptypes">React&#39;s proptypes</h2>
-<pre><code>ActivationAccount.propTypes = {
+    <h2 id="react-s-proptypes">React&#39;s PropTypes</h2>
+<pre><code class="lang-javascript">ActivationAccount.propTypes = {
   account: PropTypes.shape({
     id: PropTypes.number.isRequired,
     screenName: PropTypes.string,
@@ -76,29 +85,50 @@ app.monitoring.stringifyIDL = function(idl, useHTML) {
   }),
   formatNumber: PropTypes.func,
   translate: PropTypes.func,
-};
-
-* Problem: Just for react components. Limited expressiveness</code></pre>
-
-  </section>
-  <section class="slide hidden">
-    <h2 id="we-are-not-talking-about-an-alternative-javascript-">We are not talking about an “alternative” JavaScript.</h2>
-<h3 id="sorry-coffescript-fans">Sorry coffescript fans</h3>
-
-  </section>
-  <section class="slide hidden">
-    <h1 id="types-had-bad-reputation">Types had bad reputation</h1>
+};</code></pre>
 <ul>
-<li>Types have a reputation of being unnecessarily ceremonious</li>
-<li>This is not about putting the &quot;Java&quot; back into JavaScript</li>
-<li>Modern types systems are smarter</li>
+<li>Problem: Just for React components. Limited expressiveness.</li>
 </ul>
 
   </section>
   <section class="slide hidden">
-    <h2 id="type-inference">Type inference</h2>
-<pre><code>var foo = 123;
-foo = &#39;456&#39;; // Error: cannot assign `string` to `number`</code></pre>
+    <h2 id="we-are-not-talking-about-an-alternative-javascript-">We are not talking about an “alternative” JavaScript.</h2>
+<p>(Sorry CoffeScript fans)</p>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="types-had-bad-reputation">Types had bad reputation</h1>
+
+  </section>
+  <section class="slide hidden">
+    <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractSingletonProxyFactoryBean</span>
+<span class="hljs-keyword">extends</span> <span class="hljs-title">ProxyConfig</span>
+<span class="hljs-keyword">implements</span> <span class="hljs-title">FactoryBean</span>, <span class="hljs-title">BeanClassLoaderAware</span>, <span class="hljs-title">InitializingBean</span> </span>{
+    ...
+}
+
+http:<span class="hljs-comment">//static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html</span></code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="types-bad-reputation">Types bad reputation</h1>
+<ul>
+<li>This is not about putting the &quot;Java&quot; back into JavaScript</li>
+<li>Types have a reputation of being unnecessarily ceremonious</li>
+</ul>
+
+  </section>
+  <section class="slide hidden">
+    <blockquote>
+<p>Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.</p>
+</blockquote>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="modern-types-systems-are-smarter">Modern types systems are smarter</h2>
+<h2 id="type-inference">Type inference</h2>
+<pre><code class="lang-typescript"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+foo = <span class="hljs-string">'456'</span>; <span class="hljs-comment">// Error: cannot assign `string` to `number`</span></code></pre>
 
   </section>
   <section class="slide hidden">
@@ -106,212 +136,257 @@ foo = &#39;456&#39;; // Error: cannot assign `string` to `number`</code></pre>
 <ul>
 <li>Duck typing is a first class language construct</li>
 </ul>
-<pre><code> interface Point2D {
-     x: number;
-     y: number;
- }
- interface Point3D {
-     x: number;
-     y: number;
-     z: number;
- }
- var point2D: Point2D = { x: 0, y: 10 }
- var point3D: Point3D = { x: 0, y: 10, z: 20 }
- function iTakePoint2D(point: Point2D) { /* do something */ }
-
- iTakePoint2D(point2D); // exact match okay
- iTakePoint2D(point3D); // extra information okay
- iTakePoint2D({ x: 0 }); // Error: missing information `y`</code></pre>
+<blockquote>
+<p>If it looks like a duck and quacks like a duck, it&#39;s a duck</p>
+</blockquote>
 
   </section>
   <section class="slide hidden">
-    <p>Nullability
-One of my main sources of runtime exceptions when programming Java</p>
-<p>Even after many years it is still surprising how many corner cases I miss in complex code</p>
-<pre><code>function foo(num: number) {
-4      if (num &gt; 10) {
-5          return &#39;cool&#39;;
-6      }
-7  }
+    <pre><code>interface Point2D {
+ x: number;
+ y: number;
+}
+interface Point3D {
+ x: number;
+ y: number;
+ z: number;
+}
+var point2D: Point2D = { x: 0, y: 10 }
+var point3D: Point3D = { x: 0, y: 10, z: 20 }
+function iTakePoint2D(point: Point2D) { /* do something */ }
 
-
-const fooed: string|void = foo(9);
-3  if (fooed) {
-4      fooed.toString();
-5  }</code></pre>
-<p>typescript strictNullChecks</p>
-
-  </section>
-  <section class="slide hidden">
-    <p>Generics</p>
-<p>let cats: Array<Cat> = []; // can only contain cats
-2  let animals: Array<Animal> = []; // can only contain animals</p>
+iTakePoint2D(point2D); // exact match okay
+iTakePoint2D(point3D); // extra information okay
+iTakePoint2D({ x: 0 }); // Error: missing information `y`</code></pre>
 
   </section>
   <section class="slide hidden">
-    <p>Typescript</p>
+    <h2 id="types-can-help-us-with-problems-we-have-every-day-">Types can help us with problems we have every day.</h2>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="nullability">Nullability</h2>
+
+  </section>
+  <section class="slide hidden">
+    <p><img src="images/undefined.png" alt=""></p>
+
+  </section>
+  <section class="slide hidden">
+    <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>{
+    <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">10</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'cool'</span>;
+    }
+}
+
+<span class="hljs-keyword">const</span> fooed = foo(<span class="hljs-number">9</span>);
+fooed.toString();</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <p>Uncaught TypeError: Cannot read property &#39;toString&#39; of undefined</p>
+
+  </section>
+  <section class="slide hidden">
+    <pre><code class="lang-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num: <span class="hljs-built_in">number</span></span>) </span>{
+    <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">10</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'cool'</span>;
+    }
+}
+
+<span class="hljs-keyword">const</span> fooed: <span class="hljs-built_in">string</span>|<span class="hljs-built_in">void</span> = foo(<span class="hljs-number">9</span>);
+<span class="hljs-keyword">if</span> (fooed) {
+  fooed.toString();
+}</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="typescript-vs-flow">TypeScript vs Flow</h1>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="typescript">Typescript</h1>
 <ul>
-<li>Its a superset of javascript</li>
-<li></li>
+<li>Its a superset of javascript </li>
+<li>By Microsoft</li>
+<li>Ease of use and tool support over soundness</li>
+<li>Based on ES6 (probably ES7/ES8)</li>
+<li>Adds optional type annotations, visibility, and decorators</li>
+<li>Compiler checks and transpile to ES3/ES5/ES6</li>
+<li>2.x with major changes released recently</li>
 </ul>
-<p>ease of use and tool support over soundness</p>
-<p><a href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
-By Microsoft (Anders Hejlsberg)
-Based on ES6 (probably ES7/ES8)
-Adds optional type annotations, visibility, and decorators
-Compiler checks and removes annotations
-2.x with major changes released recently</p>
 
   </section>
   <section class="slide hidden">
-    <p>Flow</p>
+    <h1 id="flow">Flow</h1>
 <ul>
-<li>No es un lenguaje nuevo, es un type checker</li>
-<li>Se le añade un preprocesador a babel para eliminar las anotaciones de los tipos
-soundness, no runtime exceptions as goal
-<a href="http://flowtype.org/">http://flowtype.org/</a>
-By Facebook
-Flow is a static type checker, designed to quickly find errors in JavaScript applications
-Not a compiler, but checker
-If present, type annotations can very easily be removed by babel for runtime</li>
+<li>Its a superset of javascript </li>
+<li>By Facebook</li>
+<li>No runtime exceptions as goal</li>
+<li>Not a compiler, but checker</li>
+<li>Type annotations can very easily be removed by babel for runtime</li>
 </ul>
 
   </section>
   <section class="slide hidden">
-    <p>typescript vs flow</p>
+    <h1 id="typescript-vs-flow">TypeScript vs Flow</h1>
 <ul>
 <li><p>Both TypeScript and Flow provide gradual static typing capabilities. They also use a similar syntax for type annotations and declaration files.</p>
 <p>TypeScript wants to provide great tooling and language services for autocompletion, code navigation, and refactoring. Flow, on the other hand, develops a deeper understanding of your code and even does interprocedural analyses.</p>
 </li>
 </ul>
+<p><strong>IMPROVE</strong></p>
 
   </section>
   <section class="slide hidden">
-    <h1 id="migration">Migration</h1>
-<p>Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.</p>
-<h2 id="migration">Migration</h2>
-<p>First, we were surprised by the number of small bugs we found when converting our code</p>
+    <h1 id="es6-7-features-available">ES6/7 features available</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>object spread</th>
+<th>async/await</th>
+<th>generators</th>
+<th>property initializators</th>
+<th>arrow function</th>
+<th>default parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>typescript</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></p>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="real-life-code">Real life code</h1>
+<p><a href="https://flow.org/en/docs/frameworks/">https://flow.org/en/docs/frameworks/</a></p>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="react-example">React example</h1>
+<pre><code>type DefaultProps = { prop: string };
+type Props        = { prop: string };
+type State        = { prop: string };
+
+class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {    
+    static defaultProps = { prop: &quot;foo&quot; };        
+    state = { prop: &quot;bar&quot; };    
+    button: HTMLButtonElement;
+
+    onMouseEvent(event: MouseEvent) {
+      // ...
+    }
+
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        // ...
+    }           
+
+    render() {
+        return &lt;button ref={el =&gt; this.button = el}&gt;Toggle&lt;/button&gt;;
+    }
+}</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h1 id="redux-example">Redux example</h1>
+<h2 id="redux-state">Redux: State</h2>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> State = {
+  users: <span class="hljs-built_in">Array</span>&lt;{
+    id: <span class="hljs-built_in">string</span>,
+    name: <span class="hljs-built_in">string</span>,
+    age: <span class="hljs-built_in">number</span>,
+    phoneNumber: <span class="hljs-built_in">string</span>,
+  }&gt;,
+  activeUserID: <span class="hljs-built_in">string</span>,
+  <span class="hljs-comment">// ...</span>
+};</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="redux-action-creator">Redux: Action creator</h2>
+<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> FooAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">"FOO"</span>, foo: <span class="hljs-built_in">number</span> };
+<span class="hljs-keyword">type</span> BarAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">"BAR"</span>, bar: <span class="hljs-built_in">boolean</span> };
+
+<span class="hljs-keyword">type</span> Action = FooAction | BarAction;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">value: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">FooAction</span> </span>{
+  <span class="hljs-keyword">return</span> { <span class="hljs-keyword">type</span>: <span class="hljs-string">"FOO"</span>, foo: value };
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">BarAction</span> </span>{
+  <span class="hljs-keyword">return</span> { <span class="hljs-keyword">type</span>: <span class="hljs-string">"BAR"</span>, bar: value };
+}</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="redux-reducer">Redux: Reducer</h2>
+<pre><code class="lang-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reducer</span>(<span class="hljs-params">state: State, action: Action</span>): <span class="hljs-title">State</span> </span>{
+  <span class="hljs-keyword">switch</span> (action.type) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"FOO"</span>: <span class="hljs-keyword">return</span> { ...state, value: action.foo };
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"BAR"</span>: <span class="hljs-keyword">return</span> { ...state, value: action.bar };
+    <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> state;
+  }
+}</code></pre>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="migration-example-slack">Migration example: Slack</h2>
 <p><a href="https://slack.engineering/typescript-at-slack-a81307fa288d">https://slack.engineering/typescript-at-slack-a81307fa288d</a></p>
+<h1 id="migration-gradual-typing">Migration: Gradual typing</h1>
+<blockquote>
+<p>Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.</p>
+</blockquote>
 
   </section>
   <section class="slide hidden">
-    <p>Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow</p>
+    <h1 id="migration-found-existing-bugs">Migration: Found existing bugs</h1>
+<blockquote>
+<p>First, we were surprised by the number of small bugs we found when converting our code</p>
+</blockquote>
 
   </section>
   <section class="slide hidden">
-    <h2 id="migration">Migration</h2>
+    <h1 id="migration-tooling">Migration: Tooling</h1>
+<blockquote>
+<p>Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow</p>
+</blockquote>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="migration-duration">Migration: Duration</h2>
+<blockquote>
 <p>It’s taken about six months to annotate most of the JavaScript in the desktop app code base.</p>
+</blockquote>
 
   </section>
   <section class="slide hidden">
-    <p>Developers who have experience using any strongly-typed language usually pick up the syntax within an hour or two</p>
+    <h2 id="migration-developers-training">Migration: Developers training</h2>
+<blockquote>
+<p>Developers who have experience using any strongly-typed language usually pick up the syntax within an hour or two</p>
+</blockquote>
 
   </section>
   <section class="slide hidden">
-    <p>Are Flow and TypeScript like Java/C++/C#?</p>
-<p>Both
-optionally typed / any
-built to match common JavaScript programming patterns
-type systems more expressive
-type inference
-control flow based type analysis
-TypeScript
-semantically compatible with JavaScript
-Flow
-just a checker
-not even a language of its own
-non-nullability as default</p>
-
-  </section>
-  <section class="slide hidden">
-    <p>Don’t get fooled into thinking that TypeScript is as awkward and occasionally frustrating to use as Java. Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.</p>
-
-  </section>
-  <section class="slide hidden">
-    <p>IDE integration</p>
-
-  </section>
-  <section class="slide hidden  ">
-    <p>Atom / Nuclide
-<a href="https://atom.io/">https://atom.io/</a>
-<a href="https://nuclide.io/">https://nuclide.io/</a> (Atom Package)
-Probably best Flow support
-IntelliJ IDEA / Webstorm
-Starting from 2016.3</p>
-<p>Flow: integrated checking and display of messages 
-Even better TypeScript support: uses Language Service of TypeScript Compiler
-Basic Elm support via Plugin
-Barrier to entry for JavaScript people
-Flow: low
-fits seamlessly in standard JavaScript build chain
-can be enabled file by file
-weak mode only shows clear errors in order not to overwhelm people
-TypeScript: medium
-different build chain (tsc compiler)
-can include plain JavaScript, but entry point must be TypeScript
-Elm: high
-different syntax, semantics, and tool chain
-Should you use a type checker?
-don&#39;t be fooled: checkers do not make your programs error free
-there seems to be little or no impact on productivity
-initial effort to introduce a checker is low, though
-but a type system is a complex thing, it comes at a cost
-My biased recommendation</p>
-<p>your project does not live for long: no
-your project is really simple: no
-there is a chance you will need to refactor the thing: yes
-your system is very important or even crucial for the success of your company: yes
-people enter or leave your team frequently: yes
-you have substantial amount of algorithmic code: yes
-Where do they excel?
-TypeScript: supporting people from Java and C# land
-more complete IDE support
-language server
-large set of 3rd party declaration files
-Flow: providing typings for idiomatic JavaScript
-easy to get started even with existing project
-more powerful and flexible generics
-nominal typing for classes
-Elm: functional language deliberately different from JavaScript
-simplicity of type system (no JavaScript legacy)
-always completely typed (no any)
-everything immutable and constant always and everywhere
-complete package (also great orientation for beginners)
- Barrier to entry for JavaScript people 
- Flow: low fits seamlessly in standard JavaScript build chain can be enabled file by file weak mode only shows clear errors in order not to overwhelm people TypeScript: medium different build chain (tsc compiler) can include plain JavaScript, but entry point must be TypeScript Elm: high different syntax, semantics, and tool chain</p>
-
-  </section>
-  <section class="slide hidden">
-    <p>Should you use a type checker?
-don&#39;t be fooled: checkers do not make your programs error free
-there seems to be little or no impact on productivity
-initial effort to introduce a checker is low, though
-but a type system is a complex thing, it comes at a cost
-My biased recommendation</p>
-<p>your project does not live for long: no
-your project is really simple: no
-there is a chance you will need to refactor the thing: yes
-your system is very important or even crucial for the success of your company: yes
-people enter or leave your team frequently: yes
-you have substantial amount of algorithmic code: yes</p>
-
-  </section>
-  <section class="slide hidden">
-    <p>Where do they excel?
-TypeScript: supporting people from Java and C# land
-more complete IDE support
-language server
-large set of 3rd party declaration files
-Flow: providing typings for idiomatic JavaScript
-easy to get started even with existing project
-more powerful and flexible generics
-nominal typing for classes</p>
-
-  </section>
-  <section class="slide hidden -">
-    <p>docs</p>
-<p><a href="https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html">https://basarat.gitbooks.io/typescript/content/docs/types/migrating.html</a>
-<a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/1">http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/1</a></p>
+    <h2 id="conclusion-should-you-use-a-type-checker-">Conclusion: Should you use a type checker?</h2>
+<ul>
+<li>your project does not live for long: no</li>
+<li>your project is really simple: no</li>
+<li>there is a chance you will need to refactor the thing: yes</li>
+<li>your system is very important or even crucial for the success of your company: yes</li>
+<li>people enter or leave your team frequently: yes</li>
+<li>you have substantial amount of algorithmic code: yes</li>
+</ul>
+<p><a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49">http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49</a></p>
 <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script type="text/javascript">
     var _gaq = _gaq || [];
