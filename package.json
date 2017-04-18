@@ -1,0 +1,14 @@
+{
+  "name": "tak-react-redux-tlp2k16",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node_modules/.bin/cleaver slides.md",
+    "start": "echo \"\\033[0;32m[Open]\\033[0m file://`pwd`/index.html\" && npm run build && node_modules/.bin/watch -p \"slides.md\" -c \"npm run build\"",
+    "deploy": "npm run build && git add . && git commit -m update && git push origin master && git checkout gh-pages && git merge master && git push origin gh-pages && git checkout master"
+  },
+  "dependencies": {
+    "cleaver": "^0.8.4",
+    "watch-cli": "^0.2.1"
+  }
+}

@@ -1,0 +1,47 @@
+body {
+    background: #fff;
+    color: #333;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    color: #333;
+    text-shadow: none;
+}
+
+.reveal section.cover img {
+    border: none;
+    background: none;
+    max-width: 300px;
+    box-shadow: none;
+}
+
+::selection {
+    color: white;
+    background: #5C258D;
+    text-shadow: none;
+}
+
+.reveal a:not(.image) {
+    color: #fff;
+    text-decoration: underline;
+    transition: none;
+    padding: 5px;
+}
+
+.reveal a:not(.image):hover {
+    background-color: #5C258D;
+    color: #fff;
+}
+
+.reveal pre {
+    width: 100%;
+}
+
+.reveal .progress span {
+    background: #5C258D;
+}
+
+.twitter {
+    display: flex !important;
+    justify-content: center;
+}
