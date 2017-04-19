@@ -1,7 +1,4 @@
 title: Types in JavaScript
-author:
-  twitter: axelhzf
-  url: http://axelhzf.com
 output: index.html
 controls: false
 theme: ./theme
@@ -12,8 +9,7 @@ theme: ./theme
 
 --
 
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
- (Tom Dale)
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again. - Tom Dale
 
 [https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0)
 
@@ -27,7 +23,7 @@ theme: ./theme
 
 --
 
-> Big JavaScript codebases tend to become "read-only".
+## Big JavaScript codebases tend to become "read-only".
 
 --
 
@@ -38,10 +34,6 @@ theme: ./theme
 * Types can allow for reliable refactoring
 * Types can allow for generally better IDE support
 * Types can catch some (type related) errors early
-
---
-
-> A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.
 
 --
 
@@ -101,22 +93,23 @@ ActivationAccount.propTypes = {
 public abstract class AbstractSingletonProxyFactoryBean
 extends ProxyConfig
 implements FactoryBean, BeanClassLoaderAware, InitializingBean {
-    ...
+    
 }
+```
 
 http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html
-```
+
 
 --
 
 # Types bad reputation
 
-* This is not about putting the "Java" back into JavaScript
 * Types have a reputation of being unnecessarily ceremonious
+* This is not about putting the "Java" back into JavaScript
 
 --
 
-> Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.
+### Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.
 
 --
 
@@ -124,7 +117,7 @@ http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/fra
 
 ## Type inference
 
-```typescript
+```javascript
 var foo = 123;
 foo = '456'; // Error: cannot assign `string` to `number`
 ```
@@ -139,7 +132,7 @@ foo = '456'; // Error: cannot assign `string` to `number`
  
 --
  
-```
+```javascript
 interface Point2D {
  x: number;
  y: number;
@@ -189,7 +182,7 @@ Uncaught TypeError: Cannot read property 'toString' of undefined
 
 --
 
-```typescript
+```javascript
 function foo(num: number) {
     if (num > 10) {
         return 'cool';
@@ -233,19 +226,18 @@ if (fooed) {
 
 # TypeScript vs Flow
 
-* Both TypeScript and Flow provide gradual static typing capabilities. They also use a similar syntax for type annotations and declaration files.
-
- TypeScript wants to provide great tooling and language services for autocompletion, code navigation, and refactoring. Flow, on the other hand, develops a deeper understanding of your code and even does interprocedural analyses.
-
-**IMPROVE**
+https://github.com/niieani/typescript-vs-flowtype
 
 --
 
-# ES6/7 features available
+## ES6/7 features available in typescript
 
-|            | object spread | async/await | generators | property initializators | arrow function | default parameters |
-|------------|---------------|-------------|------------|-------------------------|----------------|--------------------|
-| typescript | √             | √           | √          | √                       | √              | √                  |
+* arrow functions
+* default parameters
+* object spread
+* async/await
+* generators
+* property initializators
 
 http://kangax.github.io/compat-table/es6/
 
@@ -259,7 +251,7 @@ https://flow.org/en/docs/frameworks/
 
 # React example
 
-```
+```javascript
 type DefaultProps = { prop: string };
 type Props        = { prop: string };
 type State        = { prop: string };
@@ -289,7 +281,7 @@ class MyComponent extends React.Component<DefaultProps, Props, State> {
 
 ## Redux: State
 
-```typescript
+```javascript
 type State = {
   users: Array<{
     id: string,
@@ -306,7 +298,7 @@ type State = {
 
 ## Redux: Action creator
 
-```typescript
+```javascript
 type FooAction = { type: "FOO", foo: number };
 type BarAction = { type: "BAR", bar: boolean };
 
@@ -325,7 +317,7 @@ function bar(value: boolean): BarAction {
 
 ## Redux: Reducer
 
-```typescript
+```javascript
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "FOO": return { ...state, value: action.foo };
@@ -341,21 +333,23 @@ function reducer(state: State, action: Action): State {
 
 https://slack.engineering/typescript-at-slack-a81307fa288d
 
-# Migration: Gradual typing
+--
 
-> Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.
+## Migration: Gradual typing
+
+> JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.
 
 --
 
-# Migration: Found existing bugs
+## Migration: Found existing bugs
 
 > First, we were surprised by the number of small bugs we found when converting our code
 
 --
 
-# Migration: Tooling
+## Migration: Tooling
 
-> Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow
+> Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward.
 
 --
 
@@ -371,7 +365,11 @@ https://slack.engineering/typescript-at-slack-a81307fa288d
 
 --
 
-## Conclusion: Should you use a type checker?
+## Conclusion
+
+--
+
+## Should you use a type checker?
 
 * your project does not live for long: no
 * your project is really simple: no

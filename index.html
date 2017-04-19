@@ -17,8 +17,7 @@
   </section>
   <section class="slide hidden">
     <blockquote>
-<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
- (Tom Dale)</p>
+<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again. - Tom Dale</p>
 </blockquote>
 <p><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0"><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</a></a></p>
 
@@ -32,9 +31,7 @@
 
   </section>
   <section class="slide hidden">
-    <blockquote>
-<p>Big JavaScript codebases tend to become &quot;read-only&quot;.</p>
-</blockquote>
+    <h2 id="big-javascript-codebases-tend-to-become-read-only-">Big JavaScript codebases tend to become &quot;read-only&quot;.</h2>
 
   </section>
   <section class="slide hidden">
@@ -46,12 +43,6 @@
 <li>Types can allow for generally better IDE support</li>
 <li>Types can catch some (type related) errors early</li>
 </ul>
-
-  </section>
-  <section class="slide hidden">
-    <blockquote>
-<p>A smart static type checker increases our confidence in our code, catches easily made mistakes before they are committed, and makes the code base more self-documenting.</p>
-</blockquote>
 
   </section>
   <section class="slide hidden">
@@ -104,30 +95,27 @@ app.monitoring.stringifyIDL = <span class="hljs-function"><span class="hljs-keyw
     <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractSingletonProxyFactoryBean</span>
 <span class="hljs-keyword">extends</span> <span class="hljs-title">ProxyConfig</span>
 <span class="hljs-keyword">implements</span> <span class="hljs-title">FactoryBean</span>, <span class="hljs-title">BeanClassLoaderAware</span>, <span class="hljs-title">InitializingBean</span> </span>{
-    ...
-}
 
-http:<span class="hljs-comment">//static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html</span></code></pre>
+}</code></pre>
+<p><a href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html</a></p>
 
   </section>
   <section class="slide hidden">
     <h1 id="types-bad-reputation">Types bad reputation</h1>
 <ul>
-<li>This is not about putting the &quot;Java&quot; back into JavaScript</li>
 <li>Types have a reputation of being unnecessarily ceremonious</li>
+<li>This is not about putting the &quot;Java&quot; back into JavaScript</li>
 </ul>
 
   </section>
   <section class="slide hidden">
-    <blockquote>
-<p>Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.</p>
-</blockquote>
+    <h3 id="behind-that-java-like-syntax-is-a-language-that-is-every-bit-as-flexible-and-dynamic-as-javascript-because-well-it-is-javascript-">Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.</h3>
 
   </section>
   <section class="slide hidden">
     <h2 id="modern-types-systems-are-smarter">Modern types systems are smarter</h2>
 <h2 id="type-inference">Type inference</h2>
-<pre><code class="lang-typescript"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
 foo = <span class="hljs-string">'456'</span>; <span class="hljs-comment">// Error: cannot assign `string` to `number`</span></code></pre>
 
   </section>
@@ -142,7 +130,7 @@ foo = <span class="hljs-string">'456'</span>; <span class="hljs-comment">// Erro
 
   </section>
   <section class="slide hidden">
-    <pre><code>interface Point2D {
+    <pre><code class="lang-javascript">interface Point2D {
  x: number;
  y: number;
 }
@@ -151,13 +139,13 @@ interface Point3D {
  y: number;
  z: number;
 }
-var point2D: Point2D = { x: 0, y: 10 }
-var point3D: Point3D = { x: 0, y: 10, z: 20 }
-function iTakePoint2D(point: Point2D) { /* do something */ }
+<span class="hljs-keyword">var</span> point2D: Point2D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span> }
+<span class="hljs-keyword">var</span> point3D: Point3D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span>, z: <span class="hljs-number">20</span> }
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakePoint2D</span>(<span class="hljs-params">point: Point2D</span>) </span>{ <span class="hljs-comment">/* do something */</span> }
 
-iTakePoint2D(point2D); // exact match okay
-iTakePoint2D(point3D); // extra information okay
-iTakePoint2D({ x: 0 }); // Error: missing information `y`</code></pre>
+iTakePoint2D(point2D); <span class="hljs-comment">// exact match okay</span>
+iTakePoint2D(point3D); <span class="hljs-comment">// extra information okay</span>
+iTakePoint2D({ x: <span class="hljs-number">0</span> }); <span class="hljs-comment">// Error: missing information `y`</span></code></pre>
 
   </section>
   <section class="slide hidden">
@@ -188,13 +176,13 @@ fooed.toString();</code></pre>
 
   </section>
   <section class="slide hidden">
-    <pre><code class="lang-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num: <span class="hljs-built_in">number</span></span>) </span>{
+    <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num: number</span>) </span>{
     <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">10</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-string">'cool'</span>;
     }
 }
 
-<span class="hljs-keyword">const</span> fooed: <span class="hljs-built_in">string</span>|<span class="hljs-built_in">void</span> = foo(<span class="hljs-number">9</span>);
+<span class="hljs-keyword">const</span> fooed: string|<span class="hljs-keyword">void</span> = foo(<span class="hljs-number">9</span>);
 <span class="hljs-keyword">if</span> (fooed) {
   fooed.toString();
 }</code></pre>
@@ -230,40 +218,19 @@ fooed.toString();</code></pre>
   </section>
   <section class="slide hidden">
     <h1 id="typescript-vs-flow">TypeScript vs Flow</h1>
-<ul>
-<li><p>Both TypeScript and Flow provide gradual static typing capabilities. They also use a similar syntax for type annotations and declaration files.</p>
-<p>TypeScript wants to provide great tooling and language services for autocompletion, code navigation, and refactoring. Flow, on the other hand, develops a deeper understanding of your code and even does interprocedural analyses.</p>
-</li>
-</ul>
-<p><strong>IMPROVE</strong></p>
+<p><a href="https://github.com/niieani/typescript-vs-flowtype">https://github.com/niieani/typescript-vs-flowtype</a></p>
 
   </section>
   <section class="slide hidden">
-    <h1 id="es6-7-features-available">ES6/7 features available</h1>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>object spread</th>
-<th>async/await</th>
-<th>generators</th>
-<th>property initializators</th>
-<th>arrow function</th>
-<th>default parameters</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>typescript</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
+    <h2 id="es6-7-features-available-in-typescript">ES6/7 features available in typescript</h2>
+<ul>
+<li>arrow functions</li>
+<li>default parameters</li>
+<li>object spread</li>
+<li>async/await</li>
+<li>generators</li>
+<li>property initializators</li>
+</ul>
 <p><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></p>
 
   </section>
@@ -274,25 +241,25 @@ fooed.toString();</code></pre>
   </section>
   <section class="slide hidden">
     <h1 id="react-example">React example</h1>
-<pre><code>type DefaultProps = { prop: string };
+<pre><code class="lang-javascript">type DefaultProps = { prop: string };
 type Props        = { prop: string };
 type State        = { prop: string };
 
-class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {    
-    static defaultProps = { prop: &quot;foo&quot; };        
-    state = { prop: &quot;bar&quot; };    
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;<span class="hljs-title">DefaultProps</span>, <span class="hljs-title">Props</span>, <span class="hljs-title">State</span>&gt; </span>{    
+    static defaultProps = { prop: <span class="hljs-string">"foo"</span> };        
+    state = { prop: <span class="hljs-string">"bar"</span> };    
     button: HTMLButtonElement;
 
     onMouseEvent(event: MouseEvent) {
-      // ...
+      <span class="hljs-comment">// ...</span>
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        // ...
+        <span class="hljs-comment">// ...</span>
     }           
 
     render() {
-        return &lt;button ref={el =&gt; this.button = el}&gt;Toggle&lt;/button&gt;;
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{el</span> =&gt;</span> this.button = el}&gt;Toggle<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>;</span>
     }
 }</code></pre>
 
@@ -300,37 +267,37 @@ class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {
   <section class="slide hidden">
     <h1 id="redux-example">Redux example</h1>
 <h2 id="redux-state">Redux: State</h2>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> State = {
+<pre><code class="lang-javascript">type State = {
   users: <span class="hljs-built_in">Array</span>&lt;{
-    id: <span class="hljs-built_in">string</span>,
-    name: <span class="hljs-built_in">string</span>,
-    age: <span class="hljs-built_in">number</span>,
-    phoneNumber: <span class="hljs-built_in">string</span>,
+    id: string,
+    name: string,
+    age: number,
+    phoneNumber: string,
   }&gt;,
-  activeUserID: <span class="hljs-built_in">string</span>,
+  activeUserID: string,
   <span class="hljs-comment">// ...</span>
 };</code></pre>
 
   </section>
   <section class="slide hidden">
     <h2 id="redux-action-creator">Redux: Action creator</h2>
-<pre><code class="lang-typescript"><span class="hljs-keyword">type</span> FooAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">"FOO"</span>, foo: <span class="hljs-built_in">number</span> };
-<span class="hljs-keyword">type</span> BarAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">"BAR"</span>, bar: <span class="hljs-built_in">boolean</span> };
+<pre><code class="lang-javascript">type FooAction = { type: <span class="hljs-string">"FOO"</span>, foo: number };
+type BarAction = { type: <span class="hljs-string">"BAR"</span>, bar: boolean };
 
-<span class="hljs-keyword">type</span> Action = FooAction | BarAction;
+type Action = FooAction | BarAction;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">value: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">FooAction</span> </span>{
-  <span class="hljs-keyword">return</span> { <span class="hljs-keyword">type</span>: <span class="hljs-string">"FOO"</span>, foo: value };
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">value: number</span>): <span class="hljs-title">FooAction</span> </span>{
+  <span class="hljs-keyword">return</span> { type: <span class="hljs-string">"FOO"</span>, foo: value };
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params">value: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">BarAction</span> </span>{
-  <span class="hljs-keyword">return</span> { <span class="hljs-keyword">type</span>: <span class="hljs-string">"BAR"</span>, bar: value };
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params">value: boolean</span>): <span class="hljs-title">BarAction</span> </span>{
+  <span class="hljs-keyword">return</span> { type: <span class="hljs-string">"BAR"</span>, bar: value };
 }</code></pre>
 
   </section>
   <section class="slide hidden">
     <h2 id="redux-reducer">Redux: Reducer</h2>
-<pre><code class="lang-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reducer</span>(<span class="hljs-params">state: State, action: Action</span>): <span class="hljs-title">State</span> </span>{
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reducer</span>(<span class="hljs-params">state: State, action: Action</span>): <span class="hljs-title">State</span> </span>{
   <span class="hljs-keyword">switch</span> (action.type) {
     <span class="hljs-keyword">case</span> <span class="hljs-string">"FOO"</span>: <span class="hljs-keyword">return</span> { ...state, value: action.foo };
     <span class="hljs-keyword">case</span> <span class="hljs-string">"BAR"</span>: <span class="hljs-keyword">return</span> { ...state, value: action.bar };
@@ -342,23 +309,26 @@ class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {
   <section class="slide hidden">
     <h2 id="migration-example-slack">Migration example: Slack</h2>
 <p><a href="https://slack.engineering/typescript-at-slack-a81307fa288d">https://slack.engineering/typescript-at-slack-a81307fa288d</a></p>
-<h1 id="migration-gradual-typing">Migration: Gradual typing</h1>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="migration-gradual-typing">Migration: Gradual typing</h2>
 <blockquote>
-<p>Modern JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.</p>
+<p>JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.</p>
 </blockquote>
 
   </section>
   <section class="slide hidden">
-    <h1 id="migration-found-existing-bugs">Migration: Found existing bugs</h1>
+    <h2 id="migration-found-existing-bugs">Migration: Found existing bugs</h2>
 <blockquote>
 <p>First, we were surprised by the number of small bugs we found when converting our code</p>
 </blockquote>
 
   </section>
   <section class="slide hidden">
-    <h1 id="migration-tooling">Migration: Tooling</h1>
+    <h2 id="migration-tooling">Migration: Tooling</h2>
 <blockquote>
-<p>Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward. Gone are the days we find ourselves on Google, checking yet again which events are available on Electron’s BrowserWindow</p>
+<p>Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward.</p>
 </blockquote>
 
   </section>
@@ -377,7 +347,11 @@ class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {
 
   </section>
   <section class="slide hidden">
-    <h2 id="conclusion-should-you-use-a-type-checker-">Conclusion: Should you use a type checker?</h2>
+    <h2 id="conclusion">Conclusion</h2>
+
+  </section>
+  <section class="slide hidden">
+    <h2 id="should-you-use-a-type-checker-">Should you use a type checker?</h2>
 <ul>
 <li>your project does not live for long: no</li>
 <li>your project is really simple: no</li>
@@ -399,18 +373,6 @@ class MyComponent extends React.Component&lt;DefaultProps, Props, State&gt; {
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
-  </section>
-  <section class="slide hidden author-slide">
-    <div class="author">
-  <h1 class="name"></h1>
-    <h3 class="twitter">
-      <a href="http://twitter.com/@axelhzf">@axelhzf</a>
-    </h3>
-    <h3 class="url">
-      <a href="http://axelhzf.com">http://axelhzf.com</a>
-    </h3>
-</div>
-
   </section>
 
     </div>

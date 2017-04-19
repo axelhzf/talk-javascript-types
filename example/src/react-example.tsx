@@ -47,5 +47,3 @@ async function onClick() {
 ReactDOM.render(<Button label="a" onClick={onClick}/>, document.getElementById('#container'));
 
 
-
-
