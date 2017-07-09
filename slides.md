@@ -1,34 +1,36 @@
 title: Types in JavaScript
 output: index.html
 controls: false
-theme: ./theme
+theme: ./theme-clean
+-- cover center
 
--- cover
+  # Typescript
 
-# Types in JavaScript
 
---
+-- center
 
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again. - Tom Dale
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
 
-[https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0)
+<div class="avatar">
+  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
+  <p>Tom Dale</p>
+</div>
 
---
+<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad</p>
+
+-- center
+
+## Big JavaScript codebases tend to become "read-only".
+
+-- section dark
 
 # Benefits of using types
 
 --
 
-## Type systems make code easier to maintain
-
---
-
-## Big JavaScript codebases tend to become "read-only".
-
---
-
 # Benefits
 
+* Type systems make code easier to maintain
 * Types can make code more readable
 * Types can make code easier to analyse
 * Types can allow for reliable refactoring
@@ -39,7 +41,7 @@ theme: ./theme
 
 ## We are already using types in our application.
 
--- 
+--
 
 ## JSDoc
 
@@ -57,7 +59,7 @@ app.monitoring.stringifyIDL = function(idl, useHTML) {
 ```
 
 
-* Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation. 
+* Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation.
 
 --
 
@@ -79,6 +81,21 @@ ActivationAccount.propTypes = {
 
 --
 
+```javascript
+export const cancelRequests = (actionTypes = []) =>
+  compose(
+    map(endpoint => cancelRequest(endpoint)),
+    filter(endpoint => !!endpoint),
+    map(action => action.endpoint),
+  )(actionTypes);
+```
+
+--
+
+![](images/deal-with-it.jpg)
+
+--
+
 ## We are not talking about an “alternative” JavaScript.
 
 (Sorry CoffeScript fans)
@@ -93,7 +110,7 @@ ActivationAccount.propTypes = {
 public abstract class AbstractSingletonProxyFactoryBean
 extends ProxyConfig
 implements FactoryBean, BeanClassLoaderAware, InitializingBean {
-    
+
 }
 ```
 
@@ -129,9 +146,9 @@ foo = '456'; // Error: cannot assign `string` to `number`
 * Duck typing is a first class language construct
 
 > If it looks like a duck and quacks like a duck, it's a duck
- 
+
 --
- 
+
 ```javascript
 interface Point2D {
  x: number;
@@ -203,8 +220,8 @@ if (fooed) {
 --
 
 # Typescript
- 
-* Its a superset of javascript 
+
+* Its a superset of javascript
 * By Microsoft
 * Ease of use and tool support over soundness
 * Based on ES6 (probably ES7/ES8)
@@ -216,7 +233,7 @@ if (fooed) {
 
 # Flow
 
-* Its a superset of javascript 
+* Its a superset of javascript
 * By Facebook
 * No runtime exceptions as goal
 * Not a compiler, but checker
@@ -256,19 +273,19 @@ type DefaultProps = { prop: string };
 type Props        = { prop: string };
 type State        = { prop: string };
 
-class MyComponent extends React.Component<DefaultProps, Props, State> {    
-    static defaultProps = { prop: "foo" };        
-    state = { prop: "bar" };    
+class MyComponent extends React.Component<DefaultProps, Props, State> {
+    static defaultProps = { prop: "foo" };
+    state = { prop: "bar" };
     button: HTMLButtonElement;
-  
+
     onMouseEvent(event: MouseEvent) {
       // ...
     }
-    
+
     componentDidUpdate(prevProps: Props, prevState: State) {
         // ...
-    }           
-           
+    }
+
     render() {
         return <button ref={el => this.button = el}>Toggle</button>;
     }

@@ -8,7 +8,7 @@
     "deploy": "npm run build && git add . && git commit -m update && git push origin master && git checkout gh-pages && git merge master && git push origin gh-pages && git checkout master"
   },
   "dependencies": {
-    "cleaver": "^0.8.4",
+    "cleaver": "^0.8.5",
     "watch-cli": "^0.2.1"
   }
 }

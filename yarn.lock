@@ -44,9 +44,9 @@ chalk@~0.4.0:
     has-color "~0.1.0"
     strip-ansi "~0.1.0"
 
-cleaver@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/cleaver/-/cleaver-0.8.4.tgz#e664c12a63dcb9a6855668c0d6e4ef9f18f5618a"
+cleaver@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/cleaver/-/cleaver-0.8.5.tgz#04f1d42ac64eb7fcc85df735c7dc1d6642fe27c1"
   dependencies:
     commander "~2.1.0"
     debug "^2.1.1"
