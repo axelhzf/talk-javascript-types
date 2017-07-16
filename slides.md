@@ -2,21 +2,40 @@ title: Types in JavaScript
 output: index.html
 controls: false
 theme: ./theme-clean
+
 -- cover center
 
-https://jaredforsyth.com/type-systems-js-dev/#/
+# Adding types to JavaScript
 
-# Typescript
+-- center
+
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
+
+<div class="avatar">
+  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" />
+  <p><a href="https://twitter.com/tomdale">Tom Dale</a></p>
+</div>
+
+<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</p>
 
 --
 
-## Big JavaScript codebases tend to become "read-only".
+> Big JavaScript codebases tend to become "read-only".
+
+<div class="avatar">
+<img src="https://pbs.twimg.com/profile_images/3571497536/206cb98818a166e338287689b35dbcbf_400x400.jpeg" />
+<p><a href="https://twitter.com/ahejlsberg">Anders Hejlsberg</a></p>
+</div>
+
+<p class="source">https://channel9.msdn.com/Events/Build/2016/B881</p>
 
 --
 
 ## One of the reason is the lack of type signature
 
 --
+
+## No type signature
 
 ```javascript
 export const cancelRequests = (requestsActions) =>
@@ -28,6 +47,8 @@ export const cancelRequests = (requestsActions) =>
 ```
 
 --
+
+## Same code with types
 
 ```typescript
 type RequestAction = { type: 'request', endpoint: string};
@@ -41,53 +62,42 @@ export const cancelRequests = (requests: RequestAction[]): CancelAction[] =>
   )(requests);
 ```
 
--- section dark
+--
 
-# Benefits of using types
-
--- 
-
-##
+# We have tried to solve this problem using
 
 --
 
-# Benefits
+## JSDoc
 
-## Type systems make code easier to maintain
+```javascript
+/**
+* Converts an IDL into a understandable text
+* @param {Object} idl - The Intermediate Definition Language
+* @param {Boolean} useHTML - True to get a formatted text
+* @return {String}
+*/
+app.monitoring.stringifyIDL = function(idl, useHTML) {
+  var arr = _stringifyIDL(idl, useHTML);
+  return arr.length ? arr[0] : '';
+};
+```
 
---
-
-## Types can make code more readable
-
---
-## Types can make code easier to analyse
-
---
-## Types can allow for reliable refactoring
-
---
-
-## Types can allow for generally better IDE support
-
---
-
-## Types can catch some (type related) errors early
-
---
+* Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation.
 
 --
 
 ## React's PropTypes
 
 ```javascript
-ActivationAccount.propTypes = {
+Account.propTypes = {
   account: PropTypes.shape({
     id: PropTypes.number.isRequired,
     screenName: PropTypes.string,
     name: PropTypes.string.isRequired,
   }),
-  formatNumber: PropTypes.func,
-  translate: PropTypes.func,
+  hasAccess: PropTypes.func,
+  isAdmin: PropTypes.func,
 };
 ```
 
@@ -95,137 +105,58 @@ ActivationAccount.propTypes = {
 
 --
 
-## We are not talking about an “alternative” JavaScript.
+# Solution: 
 
-(Sorry CoffeScript fans)
-
---
-
-# Types had bad reputation
+# Use a type system
 
 --
 
-```java
-public abstract class AbstractSingletonProxyFactoryBean
-extends ProxyConfig
-implements FactoryBean, BeanClassLoaderAware, InitializingBean {
+## Benefits of using types
 
-}
-```
-
-http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html
-
---
-
-# Types bad reputation
-
-* Types have a reputation of being unnecessarily ceremonious
-* This is not about putting the "Java" back into JavaScript
-
-https://twitter.com/GusiSkywalker/status/877180369979797504
+* Type systems make code easier to maintain
+* Types can make code more readable
+* Types can make code easier to analyse
+* Types can allow for reliable refactoring
+* Types can allow for generally better IDE support
+* Types can catch some (type related) errors early
 
 --
 
-### Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.
-
---
-
-## Modern types systems are smarter
-
-## Type inference
-
-```javascript
-var foo = 123;
-foo = '456'; // Error: cannot assign `string` to `number`
-```
-
---
-
-## Structural typing
-
-* Duck typing is a first class language construct
-
-> If it looks like a duck and quacks like a duck, it's a duck
-
---
-
-```javascript
-interface Point2D {
- x: number;
- y: number;
-}
-interface Point3D {
- x: number;
- y: number;
- z: number;
-}
-var point2D: Point2D = { x: 0, y: 10 }
-var point3D: Point3D = { x: 0, y: 10, z: 20 }
-function iTakePoint2D(point: Point2D) { /* do something */ }
-
-iTakePoint2D(point2D); // exact match okay
-iTakePoint2D(point3D); // extra information okay
-iTakePoint2D({ x: 0 }); // Error: missing information `y`
-```
-
---
-
-## Types can help us with problems we have every day.
-
---
-
-## Nullability
-
---
+## Types can catch errors early
 
 ![](images/undefined.png)
 
 --
 
-```javascript
-function foo(num) {
-    if (num > 10) {
-        return 'cool';
-    }
-}
+## Types can give us better error information
 
-const fooed = foo(9);
-fooed.toString();
+```javascript
+var x = 10
+var y = x.parent
+console.log(y.name)
+
+//VM147:4 Uncaught TypeError: Cannot read property 'name' of undefined
 ```
 
 --
 
-Uncaught TypeError: Cannot read property 'toString' of undefined
+## We are not talking about an “alternative” JavaScript (Sorry CoffeScript fans)
 
 --
 
-```javascript
-function foo(num: number) {
-    if (num > 10) {
-        return 'cool';
-    }
-}
+## Typescript vs Flow
 
-const fooed: string|void = foo(9);
-if (fooed) {
-  fooed.toString();
-}
-
-```
+(JavaScript fatigue?)
 
 --
 
-# TypeScript vs Flow
-
---
-
-# Typescript
+# TypeScript
 
 * Its a superset of javascript
 * By Microsoft
 * Ease of use and tool support over soundness
 * Based on ES6 (probably ES7/ES8)
-* Adds optional type annotations, visibility, and decorators
+* Adds optional type annotations, visibility and decorators
 * Compiler checks and transpile to ES3/ES5/ES6
 * 2.x with major changes released recently
 
@@ -247,106 +178,145 @@ https://github.com/niieani/typescript-vs-flowtype
 
 --
 
-## ES6/7 features available in typescript
+# TypeScript > Flow
 
-* arrow functions
-* default parameters
-* object spread
-* async/await
-* generators
-* property initializators
-
-http://kangax.github.io/compat-table/es6/
+* Better IDE integration (VSCode and IntelliJ IDEA)
+* Third-party library definition
+* Speed
 
 --
 
-# Real life code
-
-https://flow.org/en/docs/frameworks/
+# Typescript
 
 --
 
-# React example
+## Type inference
 
 ```javascript
-type DefaultProps = { prop: string };
-type Props        = { prop: string };
-type State        = { prop: string };
+var foo = 123;
+foo = '456'; // Error: cannot assign `string` to `number`
+```
 
-class MyComponent extends React.Component<DefaultProps, Props, State> {
-    static defaultProps = { prop: "foo" };
-    state = { prop: "bar" };
-    button: HTMLButtonElement;
+--
 
-    onMouseEvent(event: MouseEvent) {
-      // ...
-    }
+## Union types
 
-    componentDidUpdate(prevProps: Props, prevState: State) {
-        // ...
-    }
-
-    render() {
-        return <button ref={el => this.button = el}>Toggle</button>;
+```typescript
+function formatCommandline(command: string[]|string) {
+    if (typeof command === 'string') {
+        return command.trim();
+    } else {
+        return command.join(' ').trim();
     }
 }
 ```
 
 --
 
-# Redux example
+## Intersection types
 
-## Redux: State
+```typescript
+function extend<T, U>(first: T, second: U): T & U {
+    
+}
 
-```javascript
-type State = {
-  users: Array<{
-    id: string,
-    name: string,
-    age: number,
-    phoneNumber: string,
-  }>,
-  activeUserID: string,
-  // ...
+var x = extend({ a: "hello" }, { b: 42 });
+
+// x now has both `a` and `b`
+var a = x.a;
+var b = x.b;
+```
+
+--
+
+## Discrimination unions
+
+```typescript
+interface Square { kind: "square"; size: number; }
+interface Rectangle { kind: "rectangle"; width: number;height: number; }
+type Shape = Square | Rectangle;
+
+function area(s: Shape) {
+    if (s.kind === "square") return s.size * s.size;
+    else return s.width * s.height;
+}
+
+```
+
+--
+
+## Generics
+```typescript
+function reverse<T>(items: T[]): T[] {
+}
+```
+
+--
+## Lookup types
+
+```typescript
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];  // Inferred type is T[K]
+}
+let x = { foo: 10, bar: "hello!" };
+let foo = getProperty(x, "foo"); // number
+```
+
+--
+
+## Mapped Types
+```typescript
+interface Person {
+    name: string;
+    age: number;
+    location: string;
+}
+type Readonly<T> = {
+    readonly [P in keyof T]: T[P];
 };
+type PartialPerson = Partial<Person>;
 ```
 
 --
 
-## Redux: Action creator
+# Thinking with types
 
-```javascript
-type FooAction = { type: "FOO", foo: number };
-type BarAction = { type: "BAR", bar: boolean };
-
-type Action = FooAction | BarAction;
-
-function foo(value: number): FooAction {
-  return { type: "FOO", foo: value };
-}
-
-function bar(value: boolean): BarAction {
-  return { type: "BAR", bar: value };
-}
-```
+https://jaredforsyth.com/type-systems-js-dev
 
 --
 
-## Redux: Reducer
+# Write down data types first
 
+--
+
+# Avoid clever code
+
+--
+
+> Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?
+> Brian Kernighan
+
+--
+
+clever
 ```javascript
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case "FOO": return { ...state, value: action.foo };
-    case "BAR": return { ...state, value: action.bar };
-    default: return state;
+props['on' + (fastClick ? 'MouseDown' : 'Click')] = myFn
+```
+unclever
+```typescript
+  if (fastClick) {
+    props.onMouseDown = myFn
+  } else {
+    props.onClick = myFn
   }
-}
-```
+```  
+--
+
+> If it's hard to type check, it's probably hard to understand
 
 --
 
-## Migration example: Slack
+## Migration: Slack
 
 https://slack.engineering/typescript-at-slack-a81307fa288d
 
@@ -382,6 +352,16 @@ https://slack.engineering/typescript-at-slack-a81307fa288d
 
 --
 
+## Migration: Audiense
+
+* Replace Babel with TypeScript
+* We found a bug in TypeScript 2.3 related to jsx and object spread. (fixed in ~1 week)
+* Gradual typing
+* Prettier support
+   
+
+--
+
 ## Conclusion
 
 --
@@ -395,22 +375,8 @@ https://slack.engineering/typescript-at-slack-a81307fa288d
 * people enter or leave your team frequently: yes
 * you have substantial amount of algorithmic code: yes
 
+
 http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49
-
-
-
--- center
-
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
-
-<div class="avatar">
-  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
-  <p>Tom Dale</p>
-</div>
-
-<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</p>
-
--- center
 
 
 <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
