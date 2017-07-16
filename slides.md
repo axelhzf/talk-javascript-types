@@ -4,62 +4,76 @@ controls: false
 theme: ./theme-clean
 -- cover center
 
-  # Typescript
+https://jaredforsyth.com/type-systems-js-dev/#/
 
+# Typescript
 
--- center
-
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
-
-<div class="avatar">
-  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
-  <p>Tom Dale</p>
-</div>
-
-<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad</p>
-
--- center
+--
 
 ## Big JavaScript codebases tend to become "read-only".
+
+--
+
+## One of the reason is the lack of type signature
+
+--
+
+```javascript
+export const cancelRequests = (requestsActions) =>
+  compose(
+    map(endpoint => cancelRequest(endpoint)),
+    filter(endpoint => !!endpoint),
+    map(action => action.endpoint),
+  )(requestsActions);
+```
+
+--
+
+```typescript
+type RequestAction = { type: 'request', endpoint: string};
+type CancelAction = { type: 'cancel', endpoint: string };
+
+export const cancelRequests = (requests: RequestAction[]): CancelAction[] =>
+  compose(
+    map(endpoint => cancelRequest(endpoint)),
+    filter(endpoint => !!endpoint),
+    map(action => action.endpoint),
+  )(requests);
+```
 
 -- section dark
 
 # Benefits of using types
 
+-- 
+
+##
+
 --
 
 # Benefits
 
-* Type systems make code easier to maintain
-* Types can make code more readable
-* Types can make code easier to analyse
-* Types can allow for reliable refactoring
-* Types can allow for generally better IDE support
-* Types can catch some (type related) errors early
+## Type systems make code easier to maintain
 
 --
 
-## We are already using types in our application.
+## Types can make code more readable
+
+--
+## Types can make code easier to analyse
+
+--
+## Types can allow for reliable refactoring
 
 --
 
-## JSDoc
+## Types can allow for generally better IDE support
 
-```javascript
-/**
-* Converts an IDL into a understandable text
-* @param {Object} idl - The Intermediate Definition Language
-* @param {Boolean} useHTML - True to get a formatted text
-* @return {String}
-*/
-app.monitoring.stringifyIDL = function(idl, useHTML) {
-  var arr = _stringifyIDL(idl, useHTML);
-  return arr.length ? arr[0] : '';
-};
-```
+--
 
+## Types can catch some (type related) errors early
 
-* Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation.
+--
 
 --
 
@@ -78,21 +92,6 @@ ActivationAccount.propTypes = {
 ```
 
 * Problem: Just for React components. Limited expressiveness.
-
---
-
-```javascript
-export const cancelRequests = (actionTypes = []) =>
-  compose(
-    map(endpoint => cancelRequest(endpoint)),
-    filter(endpoint => !!endpoint),
-    map(action => action.endpoint),
-  )(actionTypes);
-```
-
---
-
-![](images/deal-with-it.jpg)
 
 --
 
@@ -116,13 +115,14 @@ implements FactoryBean, BeanClassLoaderAware, InitializingBean {
 
 http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html
 
-
 --
 
 # Types bad reputation
 
 * Types have a reputation of being unnecessarily ceremonious
 * This is not about putting the "Java" back into JavaScript
+
+https://twitter.com/GusiSkywalker/status/877180369979797504
 
 --
 
@@ -399,6 +399,20 @@ http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49
 
 
 
+-- center
+
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
+
+<div class="avatar">
+  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
+  <p>Tom Dale</p>
+</div>
+
+<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</p>
+
+-- center
+
+
 <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -411,3 +425,5 @@ http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
+
+

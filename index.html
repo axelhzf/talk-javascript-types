@@ -17,62 +17,76 @@
   </div>
 
   <div class="slide  cover center" id="slide-1">
-    <section class="slide-content"><h1 id="typescript">Typescript</h1>
+    <section class="slide-content"><p><a href="https://jaredforsyth.com/type-systems-js-dev/#/">https://jaredforsyth.com/type-systems-js-dev/#/</a></p>
+<h1 id="typescript">Typescript</h1>
 </section>
   </div>
-  <div class="slide hidden  center" id="slide-2">
-    <section class="slide-content"><blockquote>
-<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.</p>
-</blockquote>
-<div class="avatar">
-  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
-  <p>Tom Dale</p>
-</div>
-
-<p class="source"><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad</a></p></section>
-  </div>
-  <div class="slide hidden  center" id="slide-3">
+  <div class="slide hidden" id="slide-2">
     <section class="slide-content"><h2 id="big-javascript-codebases-tend-to-become-read-only-">Big JavaScript codebases tend to become &quot;read-only&quot;.</h2>
 </section>
   </div>
-  <div class="slide hidden  section dark" id="slide-4">
-    <section class="slide-content"><h1 id="benefits-of-using-types">Benefits of using types</h1>
+  <div class="slide hidden" id="slide-3">
+    <section class="slide-content"><h2 id="one-of-the-reason-is-the-lack-of-type-signature">One of the reason is the lack of type signature</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-4">
+    <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> cancelRequests = (requestsActions) =&gt;
+  compose(
+    map(endpoint =&gt; cancelRequest(endpoint)),
+    filter(endpoint =&gt; !!endpoint),
+    map(action =&gt; action.endpoint),
+  )(requestsActions);</code></pre>
 </section>
   </div>
   <div class="slide hidden" id="slide-5">
-    <section class="slide-content"><h1 id="benefits">Benefits</h1>
-<ul>
-<li>Type systems make code easier to maintain</li>
-<li>Types can make code more readable</li>
-<li>Types can make code easier to analyse</li>
-<li>Types can allow for reliable refactoring</li>
-<li>Types can allow for generally better IDE support</li>
-<li>Types can catch some (type related) errors early</li>
-</ul>
+    <section class="slide-content"><pre><code class="lang-typescript"><span class="hljs-keyword">type</span> RequestAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">'request'</span>, endpoint: <span class="hljs-built_in">string</span>};
+<span class="hljs-keyword">type</span> CancelAction = { <span class="hljs-keyword">type</span>: <span class="hljs-string">'cancel'</span>, endpoint: <span class="hljs-built_in">string</span> };
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> cancelRequests = (requests: RequestAction[]): CancelAction[] =&gt;
+  compose(
+    map(endpoint =&gt; cancelRequest(endpoint)),
+    filter(endpoint =&gt; !!endpoint),
+    map(action =&gt; action.endpoint),
+  )(requests);</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-6">
-    <section class="slide-content"><h2 id="we-are-already-using-types-in-our-application-">We are already using types in our application.</h2>
+  <div class="slide hidden  section dark" id="slide-6">
+    <section class="slide-content"><h1 id="benefits-of-using-types">Benefits of using types</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-7">
-    <section class="slide-content"><h2 id="jsdoc">JSDoc</h2>
-<pre><code class="lang-javascript"><span class="hljs-comment">/**
-* Converts an IDL into a understandable text
-* @param {Object} idl - The Intermediate Definition Language
-* @param {Boolean} useHTML - True to get a formatted text
-* @return {String}
-*/</span>
-app.monitoring.stringifyIDL = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">idl, useHTML</span>) </span>{
-  <span class="hljs-keyword">var</span> arr = _stringifyIDL(idl, useHTML);
-  <span class="hljs-keyword">return</span> arr.length ? arr[<span class="hljs-number">0</span>] : <span class="hljs-string">''</span>;
-};</code></pre>
-<ul>
-<li>Problem: You have to trust that the person who wrote the code documented it correctly and that people who changed it later correctly updated the documentation.</li>
-</ul>
+  <div class="slide hidden  " id="slide-7">
+    <section class="slide-content"><h1 id="-">#</h1>
 </section>
   </div>
   <div class="slide hidden" id="slide-8">
+    <section class="slide-content"><h1 id="benefits">Benefits</h1>
+<h2 id="type-systems-make-code-easier-to-maintain">Type systems make code easier to maintain</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-9">
+    <section class="slide-content"><h2 id="types-can-make-code-more-readable">Types can make code more readable</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-10">
+    <section class="slide-content"><h2 id="types-can-make-code-easier-to-analyse">Types can make code easier to analyse</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-11">
+    <section class="slide-content"><h2 id="types-can-allow-for-reliable-refactoring">Types can allow for reliable refactoring</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-12">
+    <section class="slide-content"><h2 id="types-can-allow-for-generally-better-ide-support">Types can allow for generally better IDE support</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-13">
+    <section class="slide-content"><h2 id="types-can-catch-some-type-related-errors-early">Types can catch some (type related) errors early</h2>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-14">
+    <section class="slide-content"></section>
+  </div>
+  <div class="slide hidden" id="slide-15">
     <section class="slide-content"><h2 id="react-s-proptypes">React&#39;s PropTypes</h2>
 <pre><code class="lang-javascript">ActivationAccount.propTypes = {
   account: PropTypes.shape({
@@ -88,29 +102,16 @@ app.monitoring.stringifyIDL = <span class="hljs-function"><span class="hljs-keyw
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-9">
-    <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> cancelRequests = (actionTypes = []) =&gt;
-  compose(
-    map(endpoint =&gt; cancelRequest(endpoint)),
-    filter(endpoint =&gt; !!endpoint),
-    map(action =&gt; action.endpoint),
-  )(actionTypes);</code></pre>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-10">
-    <section class="slide-content"><p><img src="images/deal-with-it.jpg" alt=""></p>
-</section>
-  </div>
-  <div class="slide hidden" id="slide-11">
+  <div class="slide hidden" id="slide-16">
     <section class="slide-content"><h2 id="we-are-not-talking-about-an-alternative-javascript-">We are not talking about an “alternative” JavaScript.</h2>
 <p>(Sorry CoffeScript fans)</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-12">
+  <div class="slide hidden" id="slide-17">
     <section class="slide-content"><h1 id="types-had-bad-reputation">Types had bad reputation</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-13">
+  <div class="slide hidden" id="slide-18">
     <section class="slide-content"><pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractSingletonProxyFactoryBean</span>
 <span class="hljs-keyword">extends</span> <span class="hljs-title">ProxyConfig</span>
 <span class="hljs-keyword">implements</span> <span class="hljs-title">FactoryBean</span>, <span class="hljs-title">BeanClassLoaderAware</span>, <span class="hljs-title">InitializingBean</span> </span>{
@@ -119,26 +120,27 @@ app.monitoring.stringifyIDL = <span class="hljs-function"><span class="hljs-keyw
 <p><a href="http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html">http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/aop/framework/AbstractSingletonProxyFactoryBean.html</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-14">
+  <div class="slide hidden" id="slide-19">
     <section class="slide-content"><h1 id="types-bad-reputation">Types bad reputation</h1>
 <ul>
 <li>Types have a reputation of being unnecessarily ceremonious</li>
 <li>This is not about putting the &quot;Java&quot; back into JavaScript</li>
 </ul>
+<p><a href="https://twitter.com/GusiSkywalker/status/877180369979797504">https://twitter.com/GusiSkywalker/status/877180369979797504</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-15">
+  <div class="slide hidden" id="slide-20">
     <section class="slide-content"><h3 id="behind-that-java-like-syntax-is-a-language-that-is-every-bit-as-flexible-and-dynamic-as-javascript-because-well-it-is-javascript-">Behind that Java-like syntax is a language that is every bit as flexible and dynamic as JavaScript because, well, it is JavaScript.</h3>
 </section>
   </div>
-  <div class="slide hidden" id="slide-16">
+  <div class="slide hidden" id="slide-21">
     <section class="slide-content"><h2 id="modern-types-systems-are-smarter">Modern types systems are smarter</h2>
 <h2 id="type-inference">Type inference</h2>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
 foo = <span class="hljs-string">'456'</span>; <span class="hljs-comment">// Error: cannot assign `string` to `number`</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-17">
+  <div class="slide hidden" id="slide-22">
     <section class="slide-content"><h2 id="structural-typing">Structural typing</h2>
 <ul>
 <li>Duck typing is a first class language construct</li>
@@ -148,7 +150,7 @@ foo = <span class="hljs-string">'456'</span>; <span class="hljs-comment">// Erro
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-18">
+  <div class="slide hidden" id="slide-23">
     <section class="slide-content"><pre><code class="lang-javascript">interface Point2D {
  x: number;
  y: number;
@@ -167,19 +169,19 @@ iTakePoint2D(point3D); <span class="hljs-comment">// extra information okay</spa
 iTakePoint2D({ x: <span class="hljs-number">0</span> }); <span class="hljs-comment">// Error: missing information `y`</span></code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-19">
+  <div class="slide hidden" id="slide-24">
     <section class="slide-content"><h2 id="types-can-help-us-with-problems-we-have-every-day-">Types can help us with problems we have every day.</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-20">
+  <div class="slide hidden" id="slide-25">
     <section class="slide-content"><h2 id="nullability">Nullability</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-21">
+  <div class="slide hidden" id="slide-26">
     <section class="slide-content"><p><img src="images/undefined.png" alt=""></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-22">
+  <div class="slide hidden" id="slide-27">
     <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>{
     <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">10</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-string">'cool'</span>;
@@ -190,11 +192,11 @@ iTakePoint2D({ x: <span class="hljs-number">0</span> }); <span class="hljs-comme
 fooed.toString();</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-23">
+  <div class="slide hidden" id="slide-28">
     <section class="slide-content"><p>Uncaught TypeError: Cannot read property &#39;toString&#39; of undefined</p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-24">
+  <div class="slide hidden" id="slide-29">
     <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num: number</span>) </span>{
     <span class="hljs-keyword">if</span> (num &gt; <span class="hljs-number">10</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-string">'cool'</span>;
@@ -207,11 +209,11 @@ fooed.toString();</code></pre>
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-25">
+  <div class="slide hidden" id="slide-30">
     <section class="slide-content"><h1 id="typescript-vs-flow">TypeScript vs Flow</h1>
 </section>
   </div>
-  <div class="slide hidden" id="slide-26">
+  <div class="slide hidden" id="slide-31">
     <section class="slide-content"><h1 id="typescript">Typescript</h1>
 <ul>
 <li>Its a superset of javascript</li>
@@ -224,7 +226,7 @@ fooed.toString();</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-27">
+  <div class="slide hidden" id="slide-32">
     <section class="slide-content"><h1 id="flow">Flow</h1>
 <ul>
 <li>Its a superset of javascript</li>
@@ -235,12 +237,12 @@ fooed.toString();</code></pre>
 </ul>
 </section>
   </div>
-  <div class="slide hidden" id="slide-28">
+  <div class="slide hidden" id="slide-33">
     <section class="slide-content"><h1 id="typescript-vs-flow">TypeScript vs Flow</h1>
 <p><a href="https://github.com/niieani/typescript-vs-flowtype">https://github.com/niieani/typescript-vs-flowtype</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-29">
+  <div class="slide hidden" id="slide-34">
     <section class="slide-content"><h2 id="es6-7-features-available-in-typescript">ES6/7 features available in typescript</h2>
 <ul>
 <li>arrow functions</li>
@@ -253,12 +255,12 @@ fooed.toString();</code></pre>
 <p><a href="http://kangax.github.io/compat-table/es6/">http://kangax.github.io/compat-table/es6/</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-30">
+  <div class="slide hidden" id="slide-35">
     <section class="slide-content"><h1 id="real-life-code">Real life code</h1>
 <p><a href="https://flow.org/en/docs/frameworks/">https://flow.org/en/docs/frameworks/</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-31">
+  <div class="slide hidden" id="slide-36">
     <section class="slide-content"><h1 id="react-example">React example</h1>
 <pre><code class="lang-javascript">type DefaultProps = { prop: string };
 type Props        = { prop: string };
@@ -283,7 +285,7 @@ type State        = { prop: string };
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-32">
+  <div class="slide hidden" id="slide-37">
     <section class="slide-content"><h1 id="redux-example">Redux example</h1>
 <h2 id="redux-state">Redux: State</h2>
 <pre><code class="lang-javascript">type State = {
@@ -298,7 +300,7 @@ type State        = { prop: string };
 };</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-33">
+  <div class="slide hidden" id="slide-38">
     <section class="slide-content"><h2 id="redux-action-creator">Redux: Action creator</h2>
 <pre><code class="lang-javascript">type FooAction = { type: <span class="hljs-string">"FOO"</span>, foo: number };
 type BarAction = { type: <span class="hljs-string">"BAR"</span>, bar: boolean };
@@ -314,7 +316,7 @@ type Action = FooAction | BarAction;
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-34">
+  <div class="slide hidden" id="slide-39">
     <section class="slide-content"><h2 id="redux-reducer">Redux: Reducer</h2>
 <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reducer</span>(<span class="hljs-params">state: State, action: Action</span>): <span class="hljs-title">State</span> </span>{
   <span class="hljs-keyword">switch</span> (action.type) {
@@ -325,51 +327,51 @@ type Action = FooAction | BarAction;
 }</code></pre>
 </section>
   </div>
-  <div class="slide hidden" id="slide-35">
+  <div class="slide hidden" id="slide-40">
     <section class="slide-content"><h2 id="migration-example-slack">Migration example: Slack</h2>
 <p><a href="https://slack.engineering/typescript-at-slack-a81307fa288d">https://slack.engineering/typescript-at-slack-a81307fa288d</a></p>
 </section>
   </div>
-  <div class="slide hidden" id="slide-36">
+  <div class="slide hidden" id="slide-41">
     <section class="slide-content"><h2 id="migration-gradual-typing">Migration: Gradual typing</h2>
 <blockquote>
 <p>JavaScript is valid TypeScript, meaning that one can use TypeScript without changing a single line of code. This allowed us to use “gradual typing” by enabling the compiler and the static analysis early, without suspending work on critical bug fixes or new features.</p>
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-37">
+  <div class="slide hidden" id="slide-42">
     <section class="slide-content"><h2 id="migration-found-existing-bugs">Migration: Found existing bugs</h2>
 <blockquote>
 <p>First, we were surprised by the number of small bugs we found when converting our code</p>
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-38">
+  <div class="slide hidden" id="slide-43">
     <section class="slide-content"><h2 id="migration-tooling">Migration: Tooling</h2>
 <blockquote>
 <p>Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions. TypeScript understands which properties and methods are available on certain objects, enabling your editor to do the same. An autocomplete system that only uses words in the current document feels barbaric afterward.</p>
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-39">
+  <div class="slide hidden" id="slide-44">
     <section class="slide-content"><h2 id="migration-duration">Migration: Duration</h2>
 <blockquote>
 <p>It’s taken about six months to annotate most of the JavaScript in the desktop app code base.</p>
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-40">
+  <div class="slide hidden" id="slide-45">
     <section class="slide-content"><h2 id="migration-developers-training">Migration: Developers training</h2>
 <blockquote>
 <p>Developers who have experience using any strongly-typed language usually pick up the syntax within an hour or two</p>
 </blockquote>
 </section>
   </div>
-  <div class="slide hidden" id="slide-41">
+  <div class="slide hidden" id="slide-46">
     <section class="slide-content"><h2 id="conclusion">Conclusion</h2>
 </section>
   </div>
-  <div class="slide hidden" id="slide-42">
+  <div class="slide hidden" id="slide-47">
     <section class="slide-content"><h2 id="should-you-use-a-type-checker-">Should you use a type checker?</h2>
 <ul>
 <li>your project does not live for long: no</li>
@@ -380,7 +382,21 @@ type Action = FooAction | BarAction;
 <li>you have substantial amount of algorithmic code: yes</li>
 </ul>
 <p><a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49">http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49</a></p>
-<script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</section>
+  </div>
+  <div class="slide hidden  center" id="slide-48">
+    <section class="slide-content"><blockquote>
+<p>After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.</p>
+</blockquote>
+<div class="avatar">
+  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" class="avatar" />
+  <p>Tom Dale</p>
+</div>
+
+<p class="source"><a href="https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</a></p></section>
+  </div>
+  <div class="slide hidden  center" id="slide-49">
+    <section class="slide-content"><script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-31904298-1']);
