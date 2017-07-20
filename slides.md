@@ -7,17 +7,6 @@ theme: ./theme-clean
 
 # Adding types to JavaScript
 
--- center
-
-> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
-
-<div class="avatar">
-  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" />
-  <p><a href="https://twitter.com/tomdale">Tom Dale</a></p>
-</div>
-
-<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</p>
-
 --
 
 > Big JavaScript codebases tend to become "read-only".
@@ -38,12 +27,12 @@ theme: ./theme-clean
 ## No type signature
 
 ```javascript
-export const cancelRequests = (requestsActions) =>
+export const cancelRequests = (requests) =>
   compose(
     map(endpoint => cancelRequest(endpoint)),
     filter(endpoint => !!endpoint),
-    map(action => action.endpoint),
-  )(requestsActions);
+    map(request => request.endpoint),
+  )(requests);
 ```
 
 --
@@ -274,7 +263,7 @@ interface Person {
 type Readonly<T> = {
     readonly [P in keyof T]: T[P];
 };
-type PartialPerson = Partial<Person>;
+type ReadonlyPerson = Readonly<Person>;
 ```
 
 --
@@ -376,7 +365,20 @@ https://slack.engineering/typescript-at-slack-a81307fa288d
 * you have substantial amount of algorithmic code: yes
 
 
-http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49
+<p class="source">http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html#/49</p>
+
+-- center
+
+> After having used TypeScript for nearly a year, I have to confess: I never want to start a new project without it again.
+
+<div class="avatar">
+  <img src="https://pbs.twimg.com/profile_images/1317834118/avatar_400x400.png" />
+  <p><a href="https://twitter.com/tomdale">Tom Dale</a></p>
+</div>
+
+<p class="source">https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0</p>
+
+--
 
 
 <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
